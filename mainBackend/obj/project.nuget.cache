@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "/yOVYCTDbcA=",
+  "success": true,
+  "projectFilePath": "/home/denis/Documents/Projects/PIUG_MTP/PredictFlow/mainBackend/mainBackend.csproj",
+  "expectedPackageFiles": [
+    "/home/denis/.nuget/packages/microsoft.aspnetcore.openapi/10.0.7/microsoft.aspnetcore.openapi.10.0.7.nupkg.sha512",
+    "/home/denis/.nuget/packages/microsoft.openapi/2.0.0/microsoft.openapi.2.0.0.nupkg.sha512"
+  ],
+  "logs": []
+}
