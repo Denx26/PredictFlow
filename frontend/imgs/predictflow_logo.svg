@@ -1,0 +1,41 @@
+<svg width="100%" viewBox="0 0 680 200" role="img" xmlns="http://www.w3.org/2000/svg" style="">
+  <title style="fill:rgb(0, 0, 0);stroke:none;color:rgb(251, 251, 254);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto">PredictFlow logo</title>
+  <desc style="fill:rgb(0, 0, 0);stroke:none;color:rgb(251, 251, 254);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto">PredictFlow wordmark with a flowing waveform icon</desc>
+  <defs>
+    <linearGradient id="iconGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#6366f1"/>
+      <stop offset="100%" stop-color="#06b6d4"/>
+    </linearGradient>
+    <linearGradient id="textGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#6366f1"/>
+      <stop offset="60%" stop-color="#06b6d4"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Icon mark: stylized wave/flow with prediction arrow -->
+  <g transform="translate(40, 60)" style="fill:rgb(0, 0, 0);stroke:none;color:rgb(251, 251, 254);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto">
+    <!-- Background rounded rect -->
+    <rect x="0" y="0" width="72" height="72" rx="18" fill="url(#iconGrad)" style="stroke:none;color:rgb(251, 251, 254);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+
+    <!-- Flow wave path (white) -->
+    <path d="M10 48 C18 48 18 38 26 38 C34 38 34 48 42 48 C50 48 50 38 58 38" fill="none" stroke="white" stroke-width="3.5" stroke-linecap="round" opacity="0.55" style="fill:none;stroke:rgb(255, 255, 255);color:rgb(251, 251, 254);stroke-width:3.5px;stroke-linecap:round;stroke-linejoin:miter;opacity:0.55;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+
+    <!-- Main wave path (white) -->
+    <path d="M10 36 C18 36 18 24 26 24 C34 24 34 36 42 36 C50 36 50 24 58 24" fill="none" stroke="white" stroke-width="3.5" stroke-linecap="round" style="fill:none;stroke:rgb(255, 255, 255);color:rgb(251, 251, 254);stroke-width:3.5px;stroke-linecap:round;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+
+    <!-- Predictive dashed continuation -->
+    <path d="M58 24 L66 20" fill="none" stroke="white" stroke-width="3.5" stroke-linecap="round" stroke-dasharray="2 3" opacity="0.7" style="fill:none;stroke:rgb(255, 255, 255);color:rgb(251, 251, 254);stroke-width:3.5px;stroke-dasharray:2px, 3px;stroke-linecap:round;stroke-linejoin:miter;opacity:0.7;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+
+    <!-- Arrow tip at end -->
+    <circle cx="58" cy="24" r="4" fill="white" opacity="0.95" style="fill:rgb(255, 255, 255);stroke:none;color:rgb(251, 251, 254);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:0.95;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+    <circle cx="58" cy="24" r="2" fill="url(#iconGrad)" style="stroke:none;color:rgb(251, 251, 254);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:&quot;Anthropic Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;font-size:16px;font-weight:400;text-anchor:start;dominant-baseline:auto"/>
+  </g>
+
+  <!-- Wordmark -->
+  <text x="130" y="107" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="48" font-weight="700" letter-spacing="-1.5" fill="url(#textGrad)" style="stroke:none;color:rgb(251, 251, 254);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:system-ui, -apple-system, &quot;Segoe UI&quot;, sans-serif;font-size:48px;font-weight:700;text-anchor:start;dominant-baseline:auto">Predict</text>
+  <text x="340" y="107" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="48" font-weight="300" letter-spacing="-1" fill="var(--color-text-primary)" style="fill:rgb(250, 249, 245);stroke:none;color:rgb(251, 251, 254);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:system-ui, -apple-system, &quot;Segoe UI&quot;, sans-serif;font-size:48px;font-weight:300;text-anchor:start;dominant-baseline:auto">Flow</text>
+
+  <!-- Tagline -->
+  <text x="131" y="128" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="12" font-weight="400" letter-spacing="2.5" fill="var(--color-text-secondary)" text-anchor="start" style="fill:rgb(194, 192, 182);stroke:none;color:rgb(251, 251, 254);stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;opacity:1;font-family:system-ui, -apple-system, &quot;Segoe UI&quot;, sans-serif;font-size:12px;font-weight:400;text-anchor:start;dominant-baseline:auto">INTELLIGENT FORECASTING</text>
+
+</svg>
