@@ -1,28 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PredictFlow - Autonomous AutoML Orchestrator</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <link rel="icon" type="image/svg+xml" href="./imgs/predictflow_logo_final.svg">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <style>
-        .theme-emerald { --primary: #10b981; }
-        .theme-ocean { --primary: #0284c7; }
-        .theme-midnight { --primary: #6366f1; }
+        .theme-emerald {
+            --primary: #10b981;
+        }
+
+        .theme-ocean {
+            --primary: #0284c7;
+        }
+
+        .theme-midnight {
+            --primary: #6366f1;
+        }
     </style>
 </head>
+
 <body id="app-body" class="bg-slate-50 text-slate-800 font-sans transition-colors duration-300">
 
-    <nav class="sticky top-0 bg-white border-b border-slate-100 px-8 py-4 flex justify-between items-center z-50 shadow-sm">
+    <nav
+        class="sticky top-0 bg-white border-b border-slate-100 px-8 py-4 flex justify-between items-center z-50 shadow-sm">
         <div class="flex items-center gap-2">
-            <img src="./imgs/predictflow_logo_final.svg" alt="PredictFlow logo" class="h-15 w-auto animate-[pulse_1s_linear_3_forwards]" style="--tw-keyframes-bounce-custom: url(data:text/css;base64,MEUgeyB0cmFuc2Zvcm06IHRyYW5zbGF0ZVkoMCk7IH0gNTAlIHsgdHJhbnNmb3JtOiB0cmFuc2xhdGVZKC0yNScpOyB9IDEwMCV7IHRyYW5zb3JtOiB0cmFuc2xhdGVZKDApOyB9);">
+            <img src="./imgs/predictflow_logo_final.svg" alt="PredictFlow logo"
+                class="h-15 w-auto animate-[pulse_1s_linear_3_forwards]">
         </div>
         <div class="flex items-center gap-6">
-            <button onclick="switchView('home'); trackClick('HomeBtn')" class="text-sm font-medium text-slate-600 hover:text-emerald-500 transition cursor-pointer">Home</button>
-            <button onclick="switchView('auth'); trackClick('AuthBtn')" class="text-sm font-medium text-slate-600 hover:text-emerald-500 transition cursor-pointer">Sign In</button>
-            <button onclick="switchView('dashboard'); trackClick('DashBtn')" class="text-sm font-medium text-slate-600 hover:text-emerald-500 transition cursor-pointer">Workspace</button>
-            <button onclick="switchView('history'); trackClick('HistBtn')" class="text-sm font-medium text-slate-600 hover:text-emerald-500 transition cursor-pointer">Preferences</button>
+            <button onclick="switchView('home'); trackClick('HomeBtn')"
+                class="text-sm font-medium text-slate-600 hover:text-emerald-500 transition cursor-pointer shadow-gray-400">Home</button>
+            <button onclick="switchView('auth'); trackClick('AuthBtn')"
+                class="text-sm font-medium text-slate-600 hover:text-emerald-500 transition cursor-pointer">Sign
+                In</button>
+            <button onclick="switchView('dashboard'); trackClick('DashBtn')"
+                class="text-sm font-medium text-slate-600 hover:text-emerald-500 transition cursor-pointer">Workspace</button>
+            <button onclick="switchView('history'); trackClick('HistBtn')"
+                class="text-sm font-medium text-slate-600 hover:text-emerald-500 transition cursor-pointer">Preferences</button>
         </div>
     </nav>
 
@@ -31,17 +48,22 @@
         <section id="view-home" class="page-view grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
             <div class="lg:col-span-5 space-y-6">
                 <h1 class="text-5xl font-extrabold leading-tight text-slate-900">
-                    Turn Raw Data Into <span class="text-emerald-500 dynamic-text">AI Models</span> Via Natural Language.
+                    Turn Raw Data Into <span class="text-emerald-500 dynamic-text">AI Models</span> Via Natural
+                    Language.
                 </h1>
                 <p class="text-lg text-slate-500">
-                    Upload your datasets, tell the AI agent what you want to forecast, and let our decentralized microservice architecture handle training, statistical reporting, and deployment.
+                    Upload your datasets, tell the AI agent what you want to forecast, and let our decentralized
+                    microservice architecture handle training, statistical reporting, and deployment.
                 </p>
                 <div class="flex gap-4">
-                    <button onclick="switchView('auth')" class="px-6 py-3 font-medium text-white bg-emerald-500 dynamic-bg rounded-xl shadow-lg transition cursor-pointer">Get Started</button>
+                    <button onclick="switchView('auth')"
+                        class="px-6 py-3 font-medium text-white bg-emerald-500 dynamic-bg rounded-xl shadow-lg transition cursor-pointer">Get
+                        Started</button>
                 </div>
             </div>
-            
-            <div class="lg:col-span-7 bg-white p-6 rounded-2xl shadow-xl border border-slate-100 space-y-6 animate-[bounce_2s_linear_3]">
+
+            <div
+                class="lg:col-span-7 bg-white p-6 rounded-2xl shadow-xl border border-slate-100 space-y-6 animate-[bounce_2s_linear_3]">
                 <div class="flex justify-between items-center border-b border-slate-100 pb-4">
                     <div class="flex items-center gap-2">
                         <span class="w-3 h-3 rounded-full bg-red-400"></span>
@@ -49,17 +71,20 @@
                         <span class="w-3 h-3 rounded-full bg-emerald-400"></span>
                         <span class="text-xs font-mono text-slate-400 ml-2">preview_session.log</span>
                     </div>
-                    <span class="text-xs bg-slate-100 text-slate-600 px-2 py-1 rounded font-medium">Auto-Detecting Context</span>
+                    <span class="text-xs bg-slate-100 text-slate-600 px-2 py-1 rounded font-medium">Auto-Detecting
+                        Context</span>
                 </div>
-                
+
                 <div class="space-y-4">
                     <div class="p-4 bg-slate-900 rounded-xl font-mono text-xs text-emerald-400 space-y-1 shadow-inner">
                         <p class="text-slate-500">[INFO] Initializing LangChain agent connection...</p>
-                        <p class="text-slate-500">[INFO] Parsing uploaded dataframe schema (12 features, 15000 rows)...</p>
-                        <p class="text-amber-400">[AGENT] Context identified: Non-linear regression problem detected.</p>
-                        <p>[MODEL] Selecting optimal model: RandomForestRegressor vs GradientBoosting...</p>
+                        <p class="text-slate-500">[INFO] Parsing uploaded dataframe schema (12 features, 15000 rows)...
+                        </p>
+                        <p class="text-amber-400">[AGENT] Context identified: Non-linear regression problem detected.
+                        </p>
+                        <p>[MODEL] Selecting optimal model: RandomForestRegressor vs GradientBoosting... (example)</p>
                     </div>
-                    
+
                     <div class="grid grid-cols-3 gap-4">
                         <div class="border border-slate-100 p-3 rounded-xl bg-slate-50">
                             <p class="text-[10px] uppercase font-bold text-slate-400">Features</p>
@@ -78,62 +103,83 @@
             </div>
         </section>
 
-        <section id="view-auth" class="page-view hidden max-w-md mx-auto bg-white p-8 rounded-2xl shadow-lg border border-slate-100 space-y-6">
+        <section id="view-auth"
+            class="page-view hidden max-w-md mx-auto bg-white p-8 rounded-2xl shadow-lg border border-slate-100 space-y-6">
             <h2 class="text-2xl font-bold text-slate-900 text-center">Create Account</h2>
             <form id="authForm" onsubmit="validateAuth(event)" class="space-y-4">
                 <div>
                     <label class="block text-sm font-medium text-slate-700 mb-1">Full Name</label>
-                    <input type="text" id="valName" class="w-full px-4 py-2 border border-slate-200 rounded-lg focus:outline-emerald-500" placeholder="Denis Tucskos">
-                    <p id="errName" class="text-xs text-red-500 mt-1 hidden">Validation Error: Name input field cannot be empty!</p>
+                    <input type="text" id="valName"
+                        class="w-full px-4 py-2 border border-slate-200 rounded-lg focus:outline-emerald-500"
+                        placeholder="eg. Denis">
+                    <p id="errName" class="text-xs text-red-500 mt-1 hidden">Validation Error: Name input field cannot
+                        be empty!</p>
                 </div>
                 <div>
                     <label class="block text-sm font-medium text-slate-700 mb-1">Email Address</label>
-                    <input type="text" id="valEmail" class="w-full px-4 py-2 border border-slate-200 rounded-lg focus:outline-emerald-500" placeholder="denis@student.upt.ro">
-                    <p id="errEmail" class="text-xs text-red-500 mt-1 hidden">Validation Error: Enter a valid email address containing '@'!</p>
+                    <input type="text" id="valEmail"
+                        class="w-full px-4 py-2 border border-slate-200 rounded-lg focus:outline-emerald-500"
+                        placeholder="denis@example.com">
+                    <p id="errEmail" class="text-xs text-red-500 mt-1 hidden">Validation Error: Enter a valid email
+                        address containing '@'!</p>
                 </div>
                 <div>
                     <label class="block text-sm font-medium text-slate-700 mb-1">Password</label>
-                    <input type="password" id="valPassword" class="w-full px-4 py-2 border border-slate-200 rounded-lg focus:outline-emerald-500" placeholder="••••••••">
-                    <p id="errPassword" class="text-xs text-red-500 mt-1 hidden">Validation Error: Password must be at least 6 characters long!</p>
+                    <input type="password" id="valPassword"
+                        class="w-full px-4 py-2 border border-slate-200 rounded-lg focus:outline-emerald-500"
+                        placeholder="••••••••">
+                    <p id="errPassword" class="text-xs text-red-500 mt-1 hidden">Validation Error: Password must be at
+                        least 6 characters long!</p>
                 </div>
-                <button type="submit" class="w-full py-3 text-white bg-emerald-500 dynamic-bg rounded-xl font-medium transition cursor-pointer">Register</button>
+                <button type="submit"
+                    class="w-full py-3 text-white bg-emerald-500 dynamic-bg rounded-xl font-medium transition cursor-pointer">Register</button>
             </form>
         </section>
 
         <section id="view-dashboard" class="page-view hidden space-y-8">
             <div id="grid-container" class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                
-                <div id="panel-upload" class="lg:col-span-2 bg-white p-8 rounded-2xl shadow-md border border-slate-100 space-y-6">
+
+                <div id="panel-upload"
+                    class="lg:col-span-2 bg-white p-8 rounded-2xl shadow-md border border-slate-100 space-y-6">
                     <h3 class="text-xl font-bold">Data Core Pipeline</h3>
-                    <div class="border-2 border-dashed border-slate-200 rounded-xl p-12 text-center bg-slate-50 hover:bg-slate-100 transition cursor-pointer">
-                        <p class="text-sm text-slate-500">Drop your engineering `.csv` dataset file here or click to browse filesystem</p>
+                    <div
+                        class="border-2 border-dashed border-slate-200 rounded-xl p-12 text-center bg-slate-50 hover:bg-slate-100 transition cursor-pointer">
+                        <p class="text-sm text-slate-500">Drop your engineering `.csv` dataset file here or click to
+                            browse filesystem</p>
                     </div>
                     <div class="space-y-2">
-                        <label class="block text-sm font-medium text-slate-700">Agent Processing Instruction Prompt</label>
-                        <textarea class="w-full p-4 border border-slate-200 rounded-xl focus:outline-emerald-500" rows="3" placeholder="Describe what you want to extract or predict from the CSV file logic..."></textarea>
+                        <label class="block text-sm font-medium text-slate-700">Agent Processing Instruction
+                            Prompt</label>
+                        <textarea class="w-full p-4 border border-slate-200 rounded-xl focus:outline-emerald-500"
+                            rows="3"
+                            placeholder="Describe what you want to extract or predict from the CSV file logic..."></textarea>
                     </div>
                 </div>
-                
+
                 <div id="panel-stats" class="bg-white p-8 rounded-2xl shadow-md border border-slate-100 space-y-6">
                     <h3 class="text-xl font-bold">ML Runtime Diagnostics</h3>
-                    <p class="text-xs text-slate-400 -mt-4">Metrics are generated dynamically downstream from the Python FastAPI execution context</p>
-                    
+                    <p class="text-xs text-slate-400 -mt-4">Metrics are generated dynamically downstream from the Python
+                        FastAPI execution context</p>
+
                     <div class="grid grid-cols-1 gap-4">
                         <div class="p-4 bg-slate-50 border border-slate-100 rounded-xl">
                             <p class="text-xs font-bold text-slate-400 uppercase tracking-wider">Model Detected</p>
                             <p class="text-2xl font-black text-slate-700 mt-1">--</p>
                         </div>
                         <div class="p-4 bg-slate-50 border border-slate-100 rounded-xl">
-                            <p class="text-xs font-bold text-slate-400 uppercase tracking-wider">Model Performance (Accuracy / R²)</p>
-                            <p class="text-3xl font-black text-slate-400 mt-1">-- <span class="text-xs font-normal text-slate-400">waiting stream</span></p>
+                            <p class="text-xs font-bold text-slate-400 uppercase tracking-wider">Model Performance
+                                (Accuracy / R²)</p>
+                            <p class="text-3xl font-black text-slate-400 mt-1">-- <span
+                                    class="text-xs font-normal text-slate-400">waiting stream</span></p>
                         </div>
                         <div class="p-4 bg-slate-50 border border-slate-100 rounded-xl">
-                            <p class="text-xs font-bold text-slate-400 uppercase tracking-wider">Mean Squared Error (MSE)</p>
+                            <p class="text-xs font-bold text-slate-400 uppercase tracking-wider">Mean Squared Error
+                                (MSE)</p>
                             <p class="text-3xl font-black text-slate-400 mt-1">--</p>
                         </div>
                     </div>
                 </div>
-                
+
             </div>
         </section>
 
@@ -143,14 +189,21 @@
                 <div>
                     <label class="block text-sm font-medium text-slate-600 mb-2">Select Primary Branding Hue:</label>
                     <div class="flex gap-4">
-                        <button onclick="applyTheme('theme-emerald')" class="px-4 py-2 bg-emerald-500 text-white text-sm font-medium rounded-lg cursor-pointer">Emerald Tech</button>
-                        <button onclick="applyTheme('theme-ocean')" class="px-4 py-2 bg-sky-500 text-white text-sm font-medium rounded-lg cursor-pointer">Ocean Blue</button>
-                        <button onclick="applyTheme('theme-midnight')" class="px-4 py-2 bg-indigo-500 text-white text-sm font-medium rounded-lg cursor-pointer">Midnight</button>
+                        <button onclick="applyTheme('theme-emerald')"
+                            class="px-4 py-2 bg-emerald-500 text-white text-sm font-medium rounded-lg cursor-pointer">Emerald
+                            Tech</button>
+                        <button onclick="applyTheme('theme-ocean')"
+                            class="px-4 py-2 bg-sky-500 text-white text-sm font-medium rounded-lg cursor-pointer">Ocean
+                            Blue</button>
+                        <button onclick="applyTheme('theme-midnight')"
+                            class="px-4 py-2 bg-indigo-500 text-white text-sm font-medium rounded-lg cursor-pointer">Midnight</button>
                     </div>
                 </div>
                 <div>
                     <label class="block text-sm font-medium text-slate-600 mb-2">Canvas Canvas Mode:</label>
-                    <button onclick="toggleDarkMode()" class="px-6 py-2 border border-slate-200 rounded-lg text-sm font-medium bg-slate-50 hover:bg-slate-100 transition cursor-pointer">Toggle Light / Dark State</button>
+                    <button onclick="toggleDarkMode()"
+                        class="px-6 py-2 border border-slate-200 rounded-lg text-sm font-medium bg-slate-50 hover:bg-slate-100 transition cursor-pointer">Toggle
+                        Light / Dark State</button>
                 </div>
             </div>
 
@@ -164,12 +217,15 @@
                     <p>Click Token HistBtn: <span id="count-HistBtn" class="text-emerald-400 font-bold">0</span></p>
                 </div>
                 <div class="pt-2">
-                    <button onclick="rearrangeLayout()" class="px-4 py-2 text-sm font-medium text-white bg-slate-800 rounded-lg hover:bg-slate-900 transition shadow cursor-pointer">Rearrange Dashboard Nodes Automatically</button>
+                    <button onclick="rearrangeLayout()"
+                        class="px-4 py-2 text-sm font-medium text-white bg-slate-800 rounded-lg hover:bg-slate-900 transition shadow cursor-pointer">Rearrange
+                        Dashboard Nodes Automatically</button>
                 </div>
             </div>
         </section>
 
     </div>
-    <script src="./script.js" defer></script>
+    <script src="./script.js"></script>
 </body>
+
 </html>
