@@ -1,2 +1,12 @@
-.node_modules
+node_modules/
+**/node_modules/
+.ntp/
+package-lock.json
 
+[Bb]in/
+[Oo]bj/
+.vs/
+
+venv/
+.env
+__pycache__/
