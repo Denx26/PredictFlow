@@ -95,7 +95,7 @@ function validateAuth(event) {
 
     if (isValid) {
         Swal.fire({
-            title: 'Înregistrare Reușită!',
+            title: 'Successful Registration!',
             text: `Welcome, ${name}! Your PredictFlow account has been successfully created.`,
             icon: 'success',
             confirmButtonText: 'Enter in Workspace',

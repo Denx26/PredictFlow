@@ -27,12 +27,12 @@
     <nav
         class="sticky top-0 bg-white border-b border-slate-100 px-8 py-4 flex justify-between items-center z-50 shadow-sm">
         <div class="flex items-center gap-2">
-            <img src="./imgs/predictflow_logo_final.svg" alt="PredictFlow logo"
-                class="h-15 w-auto animate-[pulse_1s_linear_3_forwards]">
+            <img onclick="switchView('home')" src="./imgs/predictflow_logo_final.svg" alt="PredictFlow logo"
+                class="h-15 w-auto animate-[pulse_1s_linear_3_forwards] cursor-pointer flex flex-col rounded-xs shadow-lg hover:shadow-xs transition">
         </div>
         <div class="flex items-center gap-6">
             <button onclick="switchView('home'); trackClick('HomeBtn')"
-                class="text-sm font-medium text-slate-600 hover:text-emerald-500 transition cursor-pointer shadow-gray-400">Home</button>
+                class="text-sm font-medium text-slate-600 hover:text-emerald-500 transition cursor-pointer">Home</button>
             <button onclick="switchView('auth'); trackClick('AuthBtn')"
                 class="text-sm font-medium text-slate-600 hover:text-emerald-500 transition cursor-pointer">Sign
                 In</button>
