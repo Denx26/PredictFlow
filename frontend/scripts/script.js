@@ -1,4 +1,15 @@
 
+const clickCounts = { HomeBtn: 0, AuthBtn: 0, DashBtn: 0, HistBtn: 0 };
+function trackClick(buttonId) {
+    clickCounts[buttonId]++;
+    const countDisplayElement = document.getElementById(`count-${buttonId}`);
+    if (countDisplayElement) {
+        countDisplayElement.innerText = clickCounts[buttonId];
+    }
+
+}
+
+
 let isRearranged = false;
 function rearrangeLayout() {
     const container = document.getElementById('grid-container');
@@ -26,16 +37,16 @@ function rearrangeLayout() {
 
 function toggleDarkMode() {
     const body = document.getElementById('app-body');
-    const bodynav = document.getElementById('nav-body');
+    const nav = document.getElementById('nav-body');
     body.classList.toggle('bg-slate-950');
-    body.classList.toggle('text-slate-100');
     body.classList.toggle('bg-slate-50');
+    body.classList.toggle('text-slate-100');
     body.classList.toggle('text-slate-800');
 
-    bodynav.classList.toggle('bg-slate-950');
-    bodynav.classList.toggle('text-slate-100');
-    bodynav.classList.toggle('bg-slate-50');
-    bodynav.classList.toggle('text-slate-800');
+    nav.classList.toggle('bg-slate-900');
+    nav.classList.toggle('bg-white');
+    nav.classList.toggle('border-slate-700');
+    nav.classList.toggle('border-slate-100');   
 }
 
 function applyTheme(themeClass) {
@@ -90,6 +101,8 @@ function validateAuth(event) {
     }
 
     if (isValid) {
+        sessionStorage.setItem('loggedIn', 'true');
+        sessionStorage.setItem('userName', name);
         Swal.fire({
             title: 'Successful Registration!',
             text: `Welcome, ${name}! Your PredictFlow account has been successfully created.`,
