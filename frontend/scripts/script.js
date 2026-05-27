@@ -1,13 +1,3 @@
-function switchView(viewId) {
-    document.querySelectorAll('.page-view').forEach(view => view.classList.add('hidden'));
-    document.getElementById(`view-${viewId}`).classList.remove('hidden');
-}
-
-const clickCounts = { HomeBtn: 0, AuthBtn: 0, DashBtn: 0, HistBtn: 0 };
-function trackClick(buttonId) {
-    clickCounts[buttonId]++;
-    document.getElementById(`count-${buttonId}`).innerText = clickCounts[buttonId];
-}
 
 let isRearranged = false;
 function rearrangeLayout() {
@@ -36,10 +26,16 @@ function rearrangeLayout() {
 
 function toggleDarkMode() {
     const body = document.getElementById('app-body');
+    const bodynav = document.getElementById('nav-body');
     body.classList.toggle('bg-slate-950');
     body.classList.toggle('text-slate-100');
     body.classList.toggle('bg-slate-50');
     body.classList.toggle('text-slate-800');
+
+    bodynav.classList.toggle('bg-slate-950');
+    bodynav.classList.toggle('text-slate-100');
+    bodynav.classList.toggle('bg-slate-50');
+    bodynav.classList.toggle('text-slate-800');
 }
 
 function applyTheme(themeClass) {
