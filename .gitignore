@@ -11,7 +11,8 @@ venv/
 __pycache__/
 
 .env
-**/.env
+**/python_ai/.env
+
 
 *.db
 *.db-journal
