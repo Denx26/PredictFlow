@@ -3,7 +3,9 @@ using Microsoft.AspNetCore.SignalR;
 using System.Net.Http;
 using System.Threading.Tasks;
 
-namespace mainbackend.Controllers
+using mainBackend;
+
+namespace mainBackend.Controllers
 {
     [ApiController]
     [Route("api/orchestrate")]
@@ -12,8 +14,7 @@ namespace mainbackend.Controllers
         private readonly IHttpClientFactory _httpClientFactory;
         private readonly IHubContext<OrchestratorHub> _hubContext;
 
-        // Injectăm și Hub-ul de SignalR pentru a putea trimite mesaje la final
-        public sender OrchestratorController(IHttpClientFactory httpClientFactory, IHubContext<OrchestratorHub> hubContext)
+        public OrchestratorController(IHttpClientFactory httpClientFactory, IHubContext<OrchestratorHub> hubContext)
         {
             _httpClientFactory = httpClientFactory;
             _hubContext = hubContext;
@@ -25,33 +26,44 @@ namespace mainbackend.Controllers
             if (file == null || file.Length == 0)
                 return BadRequest("No file uploaded.");
 
-            var memoryStream = new MemoryStream();
-            file.CopyTo(memoryStream);
-            memoryStream.Position = 0;
+            var fileBytes = new byte[file.Length];
+            using (var stream = file.OpenReadStream())
+            {
+                int bytesRead = 0;
+                int chunk;
+                while ((chunk = stream.Read(fileBytes, bytesRead, fileBytes.Length - bytesRead)) > 0)
+                {
+                    bytesRead += chunk;
+                }
+            }
 
-            // another background proccess specific bg job 
+            var contentType = file.ContentType;
+            var fileName = file.FileName;
             _ = Task.Run(async () =>
             {
+                using var memoryStream = new MemoryStream(fileBytes);
                 try
                 {
                     var client = _httpClientFactory.CreateClient();
                     using var content = new MultipartFormDataContent();
-                    
+
                     var streamContent = new StreamContent(memoryStream);
-                    streamContent.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue(file.ContentType);
-                    
-                    content.Add(streamContent, "file", file.FileName);
+                    streamContent.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue(contentType);
+
+                    content.Add(streamContent, "file", fileName);
                     content.Add(new StringContent(prompt), "prompt");
 
-                    // this sends a request to python fastapi and await a response later to send back to frontend 
-                    var response = await client.PostAsync("http://127.0.0", content);
+                    var response = await client.PostAsync("http://127.0.0.1:8000/api/v1/internal-predict", content);
 
                     if (response.IsSuccessStatusCode)
                     {
                         var jsonResult = await response.Content.ReadAsStringAsync();
-                        
-                        // when python finishes the work will send the result in user's browser (signalr)
                         await _hubContext.Clients.Client(connectionId).SendAsync("ReceiveReport", jsonResult);
+                    }
+                    else
+                    {
+                        var errorContent = await response.Content.ReadAsStringAsync();
+                        await _hubContext.Clients.Client(connectionId).SendAsync("ReceiveError", $"Python Engine Error: {errorContent}");
                     }
                 }
                 catch (Exception ex)

@@ -1,5 +1,5 @@
 {
-  "version": 4,
+  "version": 3,
   "targets": {
     "net10.0": {
       "Humanizer.Core/2.14.1": {
@@ -2471,29 +2471,29 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\denis\\.nuget\\packages\\": {}
+    "/home/denis/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\denis\\Documents\\Main Projects\\Web\\PredictFlow\\mainBackend\\mainBackend.csproj",
+      "projectUniqueName": "/mnt/c/Users/denis/Documents/Main Projects/Web/PredictFlow/mainBackend/mainBackend.csproj",
       "projectName": "mainBackend",
-      "projectPath": "C:\\Users\\denis\\Documents\\Main Projects\\Web\\PredictFlow\\mainBackend\\mainBackend.csproj",
-      "packagesPath": "C:\\Users\\denis\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\denis\\Documents\\Main Projects\\Web\\PredictFlow\\mainBackend\\obj\\",
+      "projectPath": "/mnt/c/Users/denis/Documents/Main Projects/Web/PredictFlow/mainBackend/mainBackend.csproj",
+      "packagesPath": "/home/denis/.nuget/packages/",
+      "outputPath": "/mnt/c/Users/denis/Documents/Main Projects/Web/PredictFlow/mainBackend/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\denis\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "/home/denis/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net10.0"
       ],
       "sources": {
+        "/usr/lib/dotnet/library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "net10.0": {
-          "framework": "net10.0",
           "targetAlias": "net10.0",
           "projectReferences": {}
         }
@@ -2508,11 +2508,10 @@
         "auditLevel": "low",
         "auditMode": "all"
       },
-      "SdkAnalysisLevel": "10.0.300"
+      "SdkAnalysisLevel": "10.0.100"
     },
     "frameworks": {
       "net10.0": {
-        "framework": "net10.0",
         "targetAlias": "net10.0",
         "dependencies": {
           "Microsoft.AspNetCore.OpenApi": {
@@ -2549,7 +2548,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.300/PortableRuntimeIdentifierGraph.json",
+        "runtimeIdentifierGraphPath": "/usr/lib/dotnet/sdk/10.0.108/PortableRuntimeIdentifierGraph.json",
         "packagesToPrune": {
           "Microsoft.AspNetCore": "(,10.0.32767]",
           "Microsoft.AspNetCore.Antiforgery": "(,10.0.32767]",

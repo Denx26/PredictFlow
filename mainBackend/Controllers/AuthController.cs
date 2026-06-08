@@ -18,9 +18,9 @@ namespace mainbackend.Controllers
             command.CommandText = @"
                 CREATE TABLE IF NOT EXISTS Users (
                     Id INTEGER PRIMARY KEY AUTOINCREMENT,
-                    Name TEXT NOT EXISTS,
+                    Name TEXT NOT NULL,
                     Email TEXT UNIQUE NOT NULL,
-                    Password TEXT NOT EXISTS
+                    Password TEXT NOT NULL
                 );";
             command.ExecuteNonQuery();
         }

@@ -2,16 +2,20 @@ using mainBackend.Controllers;
 var builder = WebApplication.CreateBuilder(args);
 
 
-// 1. Înregistrare servicii în container
 builder.Services.AddControllers();
 builder.Services.AddHttpClient(); 
-builder.Services.AddSignalR();   
+builder.Services.AddSignalR(options =>
+{
+    options.EnableDetailedErrors = true;
+    options.ClientTimeoutInterval = TimeSpan.FromMinutes(2);
+    options.KeepAliveInterval = TimeSpan.FromSeconds(30);
+});   
 
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowFrontend", policy =>
     {
-        policy.WithOrigins("http://127.0.0.1:5500", "http://localhost:5500")
+        policy.WithOrigins("http://127.0.0.1:3000", "http://localhost:5286")
               .AllowAnyMethod()
               .AllowAnyHeader()
               .AllowCredentials(); 
