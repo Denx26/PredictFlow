@@ -15,6 +15,6 @@ __pycache__/
 *.db
 *.db-journal
 *.log
-mainBackend/predictflow.dbpython_ai/.env
-
+mainBackend/predictflow.db
 python_ai/.env
+
