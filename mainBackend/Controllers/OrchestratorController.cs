@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
 using System.Net.Http;
 using System.Threading.Tasks;
 
@@ -9,41 +10,57 @@ namespace mainbackend.Controllers
     public class OrchestratorController : ControllerBase
     {
         private readonly IHttpClientFactory _httpClientFactory;
+        private readonly IHubContext<OrchestratorHub> _hubContext;
 
-        public OrchestratorController(IHttpClientFactory httpClientFactory)
+        // Injectăm și Hub-ul de SignalR pentru a putea trimite mesaje la final
+        public sender OrchestratorController(IHttpClientFactory httpClientFactory, IHubContext<OrchestratorHub> hubContext)
         {
             _httpClientFactory = httpClientFactory;
+            _hubContext = hubContext;
         }
 
         [HttpPost("run")]
-        public async Task<IActionResult> ForwardToPython([FromForm] IFormFile file, [FromForm] string prompt)
+        public IActionResult ForwardToPython([FromForm] IFormFile file, [FromForm] string prompt, [FromForm] string connectionId)
         {
             if (file == null || file.Length == 0)
                 return BadRequest("No file uploaded.");
 
-            var client = _httpClientFactory.CreateClient();
-            
-            // for pack the file and fastapi from python to this class 
-            using var content = new MultipartFormDataContent();
-            
-            using var stream = file.OpenReadStream();
-            var streamContent = new StreamContent(stream);
-            streamContent.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue(file.ContentType);
-            
-            content.Add(streamContent, "file", file.FileName);
-            content.Add(new StringContent(prompt), "prompt");
+            var memoryStream = new MemoryStream();
+            file.CopyTo(memoryStream);
+            memoryStream.Position = 0;
 
-            // post the request to local fastapi from python 
-            var response = await client.PostAsync("http://127.0.0", content);
-
-            if (!response.IsSuccessStatusCode)
+            // another background proccess specific bg job 
+            _ = Task.Run(async () =>
             {
-                var errorMsg = await response.Content.ReadAsStringAsync();
-                return StatusCode((int)response.StatusCode, $"Python Error: {errorMsg}");
-            }
+                try
+                {
+                    var client = _httpClientFactory.CreateClient();
+                    using var content = new MultipartFormDataContent();
+                    
+                    var streamContent = new StreamContent(memoryStream);
+                    streamContent.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue(file.ContentType);
+                    
+                    content.Add(streamContent, "file", file.FileName);
+                    content.Add(new StringContent(prompt), "prompt");
 
-            var jsonResult = await response.Content.ReadAsStringAsync();
-            return Content(jsonResult, "application/json");
+                    // this sends a request to python fastapi and await a response later to send back to frontend 
+                    var response = await client.PostAsync("http://127.0.0", content);
+
+                    if (response.IsSuccessStatusCode)
+                    {
+                        var jsonResult = await response.Content.ReadAsStringAsync();
+                        
+                        // when python finishes the work will send the result in user's browser (signalr)
+                        await _hubContext.Clients.Client(connectionId).SendAsync("ReceiveReport", jsonResult);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    await _hubContext.Clients.Client(connectionId).SendAsync("ReceiveError", ex.Message);
+                }
+            });
+
+            return Ok(new { message = "File uploaded. AI Training started in background..." });
         }
     }
 }

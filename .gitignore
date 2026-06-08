@@ -8,5 +8,4 @@ package-lock.json
 .vs/
 
 venv/
-.env
 __pycache__/
