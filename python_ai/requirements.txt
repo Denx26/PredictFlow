@@ -1,0 +1,8 @@
+fastapi
+uvicorn
+pandas
+numpy
+pydantic
+langchain-google-genai
+flaml[automl]
+python-dotenv

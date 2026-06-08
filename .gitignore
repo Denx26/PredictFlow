@@ -9,3 +9,11 @@ package-lock.json
 
 venv/
 __pycache__/
+
+.env
+**/.env
+
+*.db
+*.db-journal
+*.log
+mainBackend/predictflow.db
