@@ -46,7 +46,7 @@ function toggleDarkMode() {
     nav.classList.toggle('bg-slate-900');
     nav.classList.toggle('bg-white');
     nav.classList.toggle('border-slate-700');
-    nav.classList.toggle('border-slate-100');   
+    nav.classList.toggle('border-slate-100');
 }
 
 function applyTheme(themeClass) {
@@ -114,6 +114,30 @@ function validateAuth(event) {
                 switchView('dashboard');
             }
         });
+    }
+}
+
+let isLoginState = true;
+
+function toggleAuthPageState(isLogin) {
+    isLoginState = isLogin;
+    const nameField = document.getElementById('container-name-field');
+    const submitBtn = document.getElementById('btn-auth-submit');
+    const tabLogin = document.getElementById('btn-toggle-login');
+    const tabRegister = document.getElementById('btn-toggle-register');
+
+    document.getElementById('auth-alert').classList.add('hidden');
+
+    if (isLoginState) {
+        nameField.classList.add('hidden');
+        submitBtn.innerText = "Sign In";
+        tabLogin.className = "w-1/2 text-center font-bold text-sm text-emerald-500 border-b-2 border-emerald-500 pb-2 transition cursor-pointer";
+        tabRegister.className = "w-1/2 text-center font-bold text-sm text-slate-400 pb-2 transition cursor-pointer";
+    } else {
+        nameField.classList.remove('hidden');
+        submitBtn.innerText = "Create Account";
+        tabRegister.className = "w-1/2 text-center font-bold text-sm text-emerald-500 border-b-2 border-emerald-500 pb-2 transition cursor-pointer";
+        tabLogin.className = "w-1/2 text-center font-bold text-sm text-slate-400 pb-2 transition cursor-pointer";
     }
 }
 
