@@ -11,7 +11,7 @@ namespace mainbackend.Controllers
 
         public AuthController()
         {
-            // Creează tabela automat la pornire dacă nu există
+            //this creates the table at runtime if it does not exist
             using var connection = new SqliteConnection(_connectionString);
             connection.Open();
             var command = connection.CreateCommand();
@@ -36,12 +36,12 @@ namespace mainbackend.Controllers
                 command.CommandText = "INSERT INTO Users (Name, Email, Password) VALUES ($name, $email, $password)";
                 command.Parameters.AddWithValue("$name", model.Name);
                 command.Parameters.AddWithValue("$email", model.Email);
-                command.Parameters.AddWithValue("$password", model.Password); // plaintext pentru viteză la prezentare
+                command.Parameters.AddWithValue("$password", model.Password); // plaintext 
                 command.ExecuteNonQuery();
 
                 return Ok(new { status = "success", name = model.Name });
             }
-            catch (SqliteException ex) when (ex.SqliteErrorCode == 19) // Unique constraint violation
+            catch (SqliteException ex) when (ex.SqliteErrorCode == 19) // constraint violation
             {
                 return BadRequest(new { detail = "Email already registered." });
             }
@@ -68,6 +68,16 @@ namespace mainbackend.Controllers
         }
     }
 
-    public class RegisterDto { public string Name { get; set; } public string Email { get; set; } public string Password { get; set; } }
-    public class LoginDto { public string Email { get; set; } public string Password { get; set; } }
+    public class RegisterDto
+    {
+        public string Name { get; set; }
+        public string Email { get; set; }
+        public string Password { get; set; }
+    }
+    public class LoginDto
+    {
+        public string Email { get; set; }
+
+        public string Password { get; set; }
+    }
 }
