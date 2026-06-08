@@ -63,7 +63,7 @@ async def internal_predict(file: UploadFile = File(...), prompt: str = Form(...)
             else:
                 most_frequent = X[col].mode()
                 fill_value = most_frequent[0] if not most_frequent.empty else "Unknown"
-                X[col] = X[col].fillna(fill_value).astype('category')
+                X[col] = X[col].fillna(fill_value).astype(str)
 
         automl_engine = AutoML()
         automl_settings = {
