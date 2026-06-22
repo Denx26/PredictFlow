@@ -16,7 +16,7 @@ load_dotenv(dotenv_path=env_path)
 app = FastAPI(title="PredictFlow - Pure Autonomous AutoML")
 
 app.add_middleware(
-    CORSMiddleware,
+    CORSMiddleware, 
     allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
@@ -44,10 +44,15 @@ async def internal_predict(file: UploadFile = File(...), prompt: str = Form(...)
         
         structured_llm = llm.with_structured_output(DatasetIntent)
         intent_prompt = f"Analyze user intent: '{prompt}'. Available columns in dataset: {list(df.columns)}."
-        intent_result = structured_llm.invoke(intent_prompt)
+        try:
+            intent_result = structured_llm.invoke(intent_prompt)
         
-        target = intent_result.target_column
-        task = intent_result.task_type
+            target = intent_result.target_column
+            task = intent_result.task_type
+        
+        except Exception:
+            target = df.columns[-1]
+            task = "regression"
         
         if target not in df.columns:
             target = df.columns[-1]
